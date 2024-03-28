@@ -1,0 +1,11 @@
+services:
+  products:
+    container_name: products
+    image: products
+    ports:
+      - 4100:4100
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    volumes:
+      - .:/app

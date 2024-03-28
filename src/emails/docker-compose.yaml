@@ -1,0 +1,13 @@
+version: '3.8'
+
+services:
+  emails: 
+    container_name: emails
+    ports:
+      - '6001:6000'
+      - '8001:8000'
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    volumes:
+      - .:/emails-dev-app

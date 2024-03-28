@@ -1,0 +1,8 @@
+FROM node:20-alpine AS devmode
+WORKDIR ./emails-dev-app
+COPY . .
+RUN npm install
+ENV PORT=6000
+EXPOSE ${PORT}
+EXPOSE 8000
+CMD npm run dev

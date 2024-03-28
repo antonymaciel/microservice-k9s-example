@@ -1,0 +1,40 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: emails
+  labels:
+    app: emails
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: emails
+  strategy:
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1
+  template:
+    metadata:
+      labels:
+        app: emails
+    spec:
+      containers:
+        - name: emails
+          image: antonymacieldx/emails:latest
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 6000
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: emails
+spec:
+  type: ClusterIP
+  ports:
+    - port: 6000
+      targetPort: 6000
+      protocol: TCP
+      name: http
+  selector:
+    app: emails
